@@ -1,0 +1,70 @@
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Add New User</h2>
+
+            <form [formGroup]="userForm" (ngSubmit)="addUsers()">
+
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" id="name" formControlName="name" class="form-control"
+                        placeholder="Enter your name" />
+                    <div *ngIf="(submitted || f['name']?.touched) && f['name']?.errors?.['required']">
+                        <div class="text-danger">
+                            Name is required.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email Field -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" formControlName="email" class="form-control"
+                        placeholder="Enter your email" />
+                    <div *ngIf="(submitted || f['email']?.touched) && f['email']?.errors?.['required']">
+                        <div *ngIf="f['email']?.errors?.['required']" class="text-danger">
+                            Email is required.
+                        </div>
+                        <div *ngIf="f['email']?.errors?.['email']" class="text-danger">
+                            Please enter a valid email address.
+                        </div>
+                    </div>
+                    <div *ngIf="f['email']?.errors?.['email'] &&  f['email']?.touched" class="text-danger">
+                        Please enter a valid email address.
+                    </div>
+
+                </div>
+
+                <!-- Role Field -->
+                <div class="mb-3">
+                    <label for="role" class="form-label">Role</label>
+                    <select id="role" formControlName="role" class="form-select">
+                        <option value="">Select a role</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                    </select>
+                    <div *ngIf="(submitted || f['role']?.touched) && f['role']?.errors?.['required']"
+                        class="text-danger">
+                        Role is required.
+                    </div>
+
+                </div>
+
+                <!-- Submit Button -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary w-100">
+                            Submit
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button [routerLink]="['/']" class="btn btn-danger w-100">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

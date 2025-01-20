@@ -1,0 +1,80 @@
+<div class="container mt-2">
+  <h3 class="text-center">RESOLUTE SOLUTIONS</h3>
+
+  <div class="mat-elevation-z8 mt-1">
+
+    <div class="row m-2">
+      <div class="col-md-4">
+        <input class="form-control mt-2" [(ngModel)]="searchString" (input)="SearchByName()" type="search" placeholder="Search" aria-label="Search">
+      </div>
+
+      <div class="col-md-8 d-flex justify-content-end">
+        <button class="btn btn-primary btn-sm" style="margin: 5px;"  (click)="goToAddUser()">Add New Users</button>
+      </div>
+    </div>
+    
+
+    <div class="row">
+      <div class="col-12">
+        <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8 w-100">
+          
+          <!-- No. Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+            <td mat-cell *matCellDef="let user"> {{ user.id }} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let user"> {{ user.name }} </td>
+          </ng-container>
+        
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let user"> {{ user.email }} </td>
+          </ng-container>
+        
+          <!-- Role Column -->
+          <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
+            <td mat-cell *matCellDef="let user"> {{ user.role }} </td>
+          </ng-container>
+        
+          <!-- Action Column -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let user">
+              <!-- Trigger mat-menu with mat-icon-button -->
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <!-- Edit Button -->
+                <button mat-menu-item color="primary" (click)="openEditDialog(user)">
+                  <mat-icon>edit</mat-icon> Edit
+                </button>
+              
+                <!-- Delete Button -->
+                <button mat-menu-item color="warn" (click)="openDeleteDialog(user)">
+                  <mat-icon color="warn">delete</mat-icon> Delete
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <!-- Table Rows -->
+          <tr mat-header-row *matHeaderRowDef="['id', 'name', 'email', 'role', 'action']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'email', 'role', 'action']"></tr>
+        </table>
+            <!-- Pagination -->
+    <mat-paginator [pageSizeOptions]="[10]" [length]="40" [pageSize]="10" showFirstLastButtons
+    aria-label="Select page of users">
+  </mat-paginator>
+      </div>
+    </div>
+
+
+  </div>
+</div>
